@@ -1,0 +1,120 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.navbar-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eef2f6;
+  height: 64px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.nav-toggle-group {
+  --mat-standard-button-toggle-shape: 9999px;
+  --mat-legacy-button-toggle-shape: 9999px;
+  --mat-button-toggle-shape: 9999px;
+  --mat-button-toggle-selected-state-background-color: #ffffff;
+  --mat-button-toggle-selected-state-text-color: #0b57d0;
+  --mat-button-toggle-background-color: transparent;
+  --mat-button-toggle-text-color: #444746;
+  --mat-button-toggle-divider-color: transparent;
+
+  background-color: #eff3f9;
+  border-radius: 9999px;
+  border: none !important;
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+
+  ::ng-deep {
+    .mat-button-toggle-appearance-standard {
+      border: none !important;
+    }
+
+    .mat-button-toggle {
+      border: none !important;
+      border-radius: 9999px !important;
+      overflow: hidden !important;
+      position: relative;
+      transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        color 0.2s ease;
+
+      .mat-button-toggle-button {
+        border-radius: 9999px !important;
+        overflow: hidden !important;
+
+        &::before {
+          border-radius: 9999px !important;
+        }
+      }
+
+      .mat-button-toggle-focus-overlay {
+        border-radius: 9999px !important;
+        overflow: hidden !important;
+      }
+
+      .mat-button-toggle-ripple {
+        border-radius: 9999px !important;
+        overflow: hidden !important;
+
+        .mat-ripple,
+        .mat-ripple-element {
+          border-radius: 9999px !important;
+        }
+      }
+
+      .mat-focus-indicator::before {
+        border-radius: 9999px !important;
+      }
+
+      .mat-button-toggle-label-content {
+        padding: 6px 20px;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 22px;
+        color: #444746;
+      }
+
+      &.mat-button-toggle-checked {
+        background-color: #ffffff !important;
+        box-shadow:
+          0 1px 3px rgba(0, 0, 0, 0.12),
+          0 1px 2px rgba(0, 0, 0, 0.08);
+
+        .mat-button-toggle-label-content {
+          color: #0b57d0 !important;
+          font-weight: 500;
+        }
+      }
+
+      &:active {
+        border-radius: 9999px !important;
+
+        .mat-button-toggle-button,
+        .mat-button-toggle-focus-overlay,
+        .mat-button-toggle-ripple {
+          border-radius: 9999px !important;
+        }
+      }
+    }
+
+    .mat-button-toggle-group-appearance-standard:not(.mat-button-toggle-vertical) {
+      .mat-button-toggle .mat-button-toggle-button::before,
+      .mat-button-toggle:first-of-type .mat-button-toggle-button::before,
+      .mat-button-toggle:last-of-type .mat-button-toggle-button::before {
+        border-radius: 9999px !important;
+      }
+    }
+
+    .mat-button-toggle + .mat-button-toggle {
+      border-left: none !important;
+    }
+  }
+}

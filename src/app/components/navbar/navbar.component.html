@@ -1,0 +1,24 @@
+<mat-toolbar class="navbar-toolbar">
+  <mat-button-toggle-group
+    [value]="currentTab()"
+    (change)="navigateTo($event.value)"
+    hideSingleSelectionIndicator
+    class="nav-toggle-group"
+    aria-label="Navigation"
+  >
+    <mat-button-toggle
+      value="photos"
+      class="nav-toggle-item"
+      (click)="navigateTo('photos')"
+    >
+      Photos
+    </mat-button-toggle>
+    <mat-button-toggle
+      value="favorites"
+      class="nav-toggle-item"
+      (click)="navigateTo('favorites')"
+    >
+      Favorites
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</mat-toolbar>
