@@ -1,0 +1,12 @@
+<section class="photo-details">
+  <header>
+    <h1>Photo Details</h1>
+  </header>
+  <div class="photo-details-content">
+    @if (id()) {
+      <p>ID zdjęcia: <strong>{{ id() }}</strong></p>
+    } @else {
+      <p>Nie wybrano zdjęcia.</p>
+    }
+  </div>
+</section>
