@@ -1,0 +1,39 @@
+<mat-card
+  class="photo-card"
+  [class.favorite]="isFavorite()"
+  (click)="onCardClick()"
+  (keydown.enter)="onCardClick()"
+  (keydown.space)="onCardClick()"
+  tabindex="0"
+  role="button"
+  [attr.aria-label]="(photo().title ?? 'Photo') + (isFavorite() ? ' - Favorite' : '')"
+>
+  <div class="image-wrapper">
+    @if (imageLoading()) {
+      <div class="image-placeholder shimmer">
+        <mat-icon class="placeholder-icon">image</mat-icon>
+      </div>
+    }
+
+    @if (imageError()) {
+      <div class="image-placeholder error">
+        <mat-icon class="placeholder-icon">broken_image</mat-icon>
+      </div>
+    } @else {
+      <img
+        [src]="photo().url"
+        [alt]="photo().title ?? 'Photo'"
+        loading="lazy"
+        (load)="onImageLoad()"
+        (error)="onImageError()"
+        [class.hidden]="imageLoading()"
+      />
+    }
+
+    @if (isFavorite()) {
+      <div class="favorite-indicator" aria-hidden="true">
+        <mat-icon>favorite</mat-icon>
+      </div>
+    }
+  </div>
+</mat-card>
