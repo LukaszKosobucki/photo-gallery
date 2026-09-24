@@ -42,4 +42,17 @@ test.describe('Routing and E2E Flow', () => {
     await page.goto('/unknown-random-path');
     await expect(page).toHaveURL(/localhost:4200\/?$/);
   });
+
+  test('should automatically load additional cards when viewport is large and has no scrollbar', async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1600 });
+    await page.goto('/');
+
+    const firstCard = page.locator('app-photo-card').first();
+    await expect(firstCard).toBeVisible({ timeout: 15000 });
+
+    await expect(async () => {
+      const count = await page.locator('app-photo-card').count();
+      expect(count).toBeGreaterThan(20);
+    }).toPass({ timeout: 15000 });
+  });
 });

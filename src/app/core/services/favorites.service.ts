@@ -14,8 +14,7 @@ export const FAVORITES_STORAGE = new InjectionToken<Storage>(
   'FAVORITES_STORAGE',
   {
     providedIn: 'root',
-    factory: () =>
-      typeof window !== 'undefined' ? window.localStorage : ({} as Storage),
+    factory: () => localStorage,
   },
 );
 
