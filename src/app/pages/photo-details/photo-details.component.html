@@ -1,12 +1,57 @@
-<section class="photo-details">
-  <header>
-    <h1>Photo Details</h1>
-  </header>
-  <div class="photo-details-content">
-    @if (id()) {
-      <p>ID zdjęcia: <strong>{{ id() }}</strong></p>
-    } @else {
-      <p>Nie wybrano zdjęcia.</p>
+<section class="photo-detail-container">
+  @if (isLoading()) {
+    <div class="loading-wrapper">
+      <app-loading-spinner message="Loading photo..."></app-loading-spinner>
+    </div>
+  } @else if (notFound()) {
+    <div class="not-found-state">
+      <mat-icon class="not-found-icon">broken_image</mat-icon>
+      <h2>Photo Not Found</h2>
+      <p>The photo you are looking for does not exist or could not be loaded.</p>
+      <a mat-flat-button color="primary" routerLink="/favorites">
+        Back to Favorites
+      </a>
+    </div>
+  } @else {
+    @if (photo(); as currentPhoto) {
+      <div class="hero-viewer">
+        <div class="hero-image-wrapper">
+          <img
+            [src]="displayUrl()"
+            [alt]="currentPhoto.title ?? 'Photo'"
+            class="hero-image"
+          />
+        </div>
+
+        <div class="action-bar">
+          <button mat-button class="back-btn" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon>
+            Back
+          </button>
+
+          @if (isFavorite()) {
+            <button
+              mat-flat-button
+              color="warn"
+              class="remove-favorite-btn"
+              (click)="removeFavorite()"
+            >
+              <mat-icon>delete</mat-icon>
+              Remove from favorites
+            </button>
+          } @else {
+            <button
+              mat-flat-button
+              color="primary"
+              class="add-favorite-btn"
+              (click)="addFavorite()"
+            >
+              <mat-icon>favorite</mat-icon>
+              Add to favorites
+            </button>
+          }
+        </div>
+      </div>
     }
-  </div>
+  }
 </section>
