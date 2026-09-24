@@ -1,59 +1,69 @@
-# PhotoGallery
+# Photo Gallery App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.27.
+> Technical assessment solution built with modern Angular (Signals, Standalone Components, OnPush change detection).
 
-## Development server
+**Live Demo:** [https://lukaszkosobucki.github.io/photo-gallery/](https://lukaszkosobucki.github.io/photo-gallery/)
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## Requirements Coverage
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- [x] **Infinite scroll at `/`**: Headless infinite scrolling with simulated real-world API latency (200–300 ms delay) and bottom loader spinner.
+- [x] **Click-to-favorite**: Clicking any photo card directly adds it to favorites without unnecessary buttons.
+- [x] **Favorites screen at `/favorites`**: Static grid of saved photos with persistent storage across page reloads via `LocalStorage`, empty state handling, and direct navigation to photo details.
+- [x] **Fullscreen single photo view at `/photos/:id`**: High-resolution 3x enlarged hero photo view with "Remove from favorites" action and route param binding.
+- [x] **Unified header layout**: Shared responsive navigation toolbar featuring route synchronization and a reactive badge displaying the live count of favorites.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Architecture & Tech Stack
 
-```bash
-ng generate component component-name
-```
+- **Framework:** Angular 19+ (Standalone Components, Signals, `ChangeDetectionStrategy.OnPush`, `withComponentInputBinding()`).
+- **State & Reactivity:** Angular Signals (`signal`, `computed`) for reactive state and RxJS for asynchronous simulated network streams.
+- **Scroll Detection:** Native `IntersectionObserver` headless pattern for zero-overhead, high-performance viewport detection.
+- **Persistence:** Abstracted `FavoritesService` with `FAVORITES_STORAGE` injection token for local storage synchronization.
+- **Testing:**
+  - **Unit & Integration:** Jest (`jest-preset-angular`) with comprehensive coverage for services, infinite scroll, and components.
+  - **End-to-End:** Playwright test suite covering full user journeys (favoriting, persistence on reload, detail view, and removal).
+- **CI/CD:** Automated GitHub Actions pipeline verifying linting, unit tests, E2E tests, production build, and zero-downtime deployment to GitHub Pages.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## Local Development
 
-## Building
+### Prerequisites
 
-To build the project run:
+- **Node.js:** `>= 20.x` (recommended `v22.x` | current environment: `v22.3.0`)
+- **npm:** `>= 10.x` (current environment: `10.9.0`)
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Quickstart
 
 ```bash
-ng test
+git clone https://github.com/LukaszKosobucki/photo-gallery.git
+cd photo-gallery
+npm install
+npm start
 ```
 
-## Running end-to-end tests
+App will be running locally at [http://localhost:4200/](http://localhost:4200/).
 
-For end-to-end (e2e) testing, run:
+### Available Scripts
 
-```bash
-ng e2e
-```
+- `npm start` - Starts local development server at `http://localhost:4200/`
+- `npm test` - Executes unit and integration test suite via Jest
+- `npm run test:watch` - Runs Jest tests in interactive watch mode
+- `npm run test:e2e` - Executes Playwright End-to-End test suite headlessly
+- `npm run test:e2e:ui` - Opens Playwright interactive UI mode
+- `npm run lint` - Runs ESLint checks across Angular templates and TypeScript code
+- `npm run build` - Compiles the optimized production build into `dist/photo-gallery/`
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## CI/CD Pipeline
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The project includes an automated GitHub Actions pipeline (`.github/workflows/ci-cd.yml`):
+
+1. **Trigger:** Runs on every push and pull request targeting the `main` branch.
+2. **Quality Gates:** Executes linter (`npm run lint`), Jest unit tests (`npm test`), and Playwright E2E tests (`npm run test:e2e`).
+3. **Build:** Compiles production bundle with `--base-href /photo-gallery/` and sets up SPA routing fallback (`404.html`).
+4. **Deployment:** Automatically publishes the production artifacts to GitHub Pages upon successful completion of all checks.
