@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { NavbarComponent } from './navbar.component';
+import { FavoritesService } from '../../core/services';
 
 @Component({ template: '' })
 class DummyComponent {}
@@ -123,5 +124,24 @@ describe('NavbarComponent', () => {
     const newComponent = newFixture.componentInstance;
     newFixture.detectChanges();
     expect(newComponent.currentTab()).toBe('favorites');
+  });
+
+  it('should display favorites count badge and update when favorites change', () => {
+    const favoritesService = TestBed.inject(FavoritesService);
+    favoritesService.clearFavorites();
+    fixture.detectChanges();
+
+    const badgeEl = fixture.nativeElement.querySelector('.favorites-badge');
+    expect(badgeEl).toBeTruthy();
+    expect(badgeEl.textContent.trim()).toBe('0');
+
+    favoritesService.addFavorite({
+      id: '1',
+      url: 'https://picsum.photos/id/1/200/300',
+      title: 'Photo #1',
+    });
+    fixture.detectChanges();
+
+    expect(badgeEl.textContent.trim()).toBe('1');
   });
 });

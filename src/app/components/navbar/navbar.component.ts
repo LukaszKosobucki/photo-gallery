@@ -5,6 +5,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { FavoritesService } from '../../core/services';
 
 export type NavTab = 'photos' | 'favorites';
 
@@ -18,9 +19,11 @@ export class NavbarComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly location = inject(Location);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly favoritesService = inject(FavoritesService);
   private lastNavigatedUrl = '';
 
   readonly currentTab = signal<NavTab>(this.getInitialTab());
+  readonly favoritesCount = this.favoritesService.totalFavorites;
 
   ngOnInit(): void {
     this.updateActiveTab();

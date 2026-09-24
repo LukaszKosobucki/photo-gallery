@@ -118,3 +118,26 @@
     }
   }
 }
+
+.favorites-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 9999px;
+  background-color: #d3e3fd;
+  color: #041e49;
+  line-height: 1;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+::ng-deep .mat-button-toggle-checked .favorites-badge {
+  background-color: #0b57d0;
+  color: #ffffff;
+}

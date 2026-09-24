@@ -18,7 +18,7 @@
       class="nav-toggle-item"
       (click)="navigateTo('favorites')"
     >
-      Favorites
+      Favorites <span class="favorites-badge">{{ favoritesCount() }}</span>
     </mat-button-toggle>
   </mat-button-toggle-group>
 </mat-toolbar>
