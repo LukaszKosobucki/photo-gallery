@@ -1,9 +1,39 @@
-<section class="photo-gallery">
-  <header>
-    <h1>Photo Gallery</h1>
-    <p>Strona główna galerii zdjęć</p>
+<section class="gallery-container">
+  <header class="gallery-header">
+    <h1>Photos</h1>
+    <p>Click on any photo to add it to your favorites.</p>
   </header>
-  <div class="photo-gallery-content">
-    <p>Galeria zdjęć - lista zdjęć pojawi się tutaj.</p>
-  </div>
+
+  <app-photo-grid>
+    @for (photo of scrollManager.items(); track photo.id) {
+      <app-photo-card
+        [photo]="photo"
+        [isFavorite]="isFavorite(photo.id)"
+        (cardClick)="onPhotoClick($event)"
+      ></app-photo-card>
+    }
+  </app-photo-grid>
+
+  @if (scrollManager.error()) {
+    <div class="error-container">
+      <p class="error-message">{{ scrollManager.error() }}</p>
+      <button mat-flat-button color="primary" (click)="scrollManager.loadMore()">
+        Retry
+      </button>
+    </div>
+  }
+
+  @if (scrollManager.isLoading()) {
+    <app-loading-spinner message="Loading more photos..."></app-loading-spinner>
+  }
+
+  @if (scrollManager.hasMore()) {
+    <div
+      class="sentinel"
+      [appInfiniteScrollSentinel]="scrollManager"
+      aria-hidden="true"
+    ></div>
+  } @else if (scrollManager.items().length > 0) {
+    <p class="end-message">You have reached the end of the gallery.</p>
+  }
 </section>

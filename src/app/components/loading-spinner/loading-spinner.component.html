@@ -1,0 +1,6 @@
+<div class="spinner-container" role="status" aria-live="polite">
+  <mat-spinner [diameter]="diameter()"></mat-spinner>
+  @if (message()) {
+    <p class="spinner-message">{{ message() }}</p>
+  }
+</div>
