@@ -6,7 +6,14 @@ const globals = require("globals");
 
 module.exports = tseslint.config(
   {
-    ignores: ["dist/**", "out-tsc/**", "coverage/**", "node_modules/**"],
+    ignores: [
+      "dist/**",
+      "out-tsc/**",
+      "coverage/**",
+      "node_modules/**",
+      "playwright-report/**",
+      "test-results/**",
+    ],
   },
   {
     files: ["**/*.ts"],
