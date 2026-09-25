@@ -7,7 +7,7 @@
   </header>
 
   @if (favorites().length === 0) {
-    <div class="empty-state">
+    <div class="empty-state" data-testid="favorites-empty-state">
       <mat-icon class="empty-icon">favorite_border</mat-icon>
       <h2>No favorite photos yet</h2>
       <p>You haven't added any photos to your favorites list yet.</p>
@@ -19,6 +19,7 @@
     <app-photo-grid>
       @for (photo of favorites(); track photo.id) {
         <app-photo-card
+          data-testid="photo-card"
           [photo]="photo"
           [isFavorite]="true"
           (cardClick)="onPhotoClick($event)"

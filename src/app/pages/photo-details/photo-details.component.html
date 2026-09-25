@@ -20,11 +20,12 @@
             [src]="displayUrl()"
             [alt]="currentPhoto.title ?? 'Photo'"
             class="hero-image"
+            data-testid="photo-detail-hero-image"
           />
         </div>
 
         <div class="action-bar">
-          <button mat-button class="back-btn" (click)="goBack()">
+          <button mat-button class="back-btn" data-testid="back-btn" (click)="goBack()">
             <mat-icon>arrow_back</mat-icon>
             Back
           </button>
@@ -34,6 +35,7 @@
               mat-flat-button
               color="warn"
               class="remove-favorite-btn"
+              data-testid="remove-favorite-btn"
               (click)="removeFavorite()"
             >
               <mat-icon>delete</mat-icon>
@@ -44,6 +46,7 @@
               mat-flat-button
               color="primary"
               class="add-favorite-btn"
+              data-testid="add-favorite-btn"
               (click)="addFavorite()"
             >
               <mat-icon>favorite</mat-icon>

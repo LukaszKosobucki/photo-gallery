@@ -9,6 +9,7 @@
     <mat-button-toggle
       value="photos"
       class="nav-toggle-item"
+      data-testid="nav-photos-tab"
       (click)="navigateTo('photos')"
     >
       Photos
@@ -16,9 +17,10 @@
     <mat-button-toggle
       value="favorites"
       class="nav-toggle-item"
+      data-testid="nav-favorites-tab"
       (click)="navigateTo('favorites')"
     >
-      Favorites <span class="favorites-badge">{{ favoritesCount() }}</span>
+      Favorites <span class="favorites-badge" data-testid="favorites-badge">{{ favoritesCount() }}</span>
     </mat-button-toggle>
   </mat-button-toggle-group>
 </mat-toolbar>
